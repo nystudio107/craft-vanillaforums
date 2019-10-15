@@ -1,0 +1,15 @@
+language: php
+
+php:
+    - 7.1
+    - 7.2
+    - 7.3
+
+matrix:
+    fast_finish: true
+
+install:
+    - composer self-update
+    - composer require "phpunit/phpunit=~7.5"
+
+script: ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover

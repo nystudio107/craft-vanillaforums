@@ -1,0 +1,68 @@
+{#
+/**
+ * Vanillaforums plugin for Craft CMS 3.x
+ *
+ * Vanillaforums Settings.twig
+ *
+ * @author    nystudio107
+ * @copyright Copyright (c) 2019 nystudio107
+ * @link      https://nystudio107.com/
+ * @package   Vanillaforums
+ * @since     3.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("nystudio107\\vanillaforums\\assetbundles\\vanillaforums\\VanillaforumsAsset") %}
+
+{% macro configWarning(setting, file='vanillaforums') -%}
+    {%- set configArray = craft.app.config.getConfigFromFile(file) -%}
+    {%- if configArray[setting] is defined -%}
+        {{- "This is being overridden by the `#{setting}` setting in the `config/#{file}.php` file." |raw }}
+    {%- else -%}
+        {{ false }}
+    {%- endif -%}
+{%- endmacro %}
+{% from _self import configWarning %}
+
+<p>Please see <a href="https://docs.vanillaforums.com/help/sso/jsconnect/" target="_blank">jsConnect Single Sign-On (SSO) </a> for details on how to set up Vanilla Forums to use SSO</p>
+
+{% if craft.vanillaforums.craft31 %}
+    {{ forms.autosuggestField({
+        'label': 'Vanilla Forums jsConnect Client ID',
+        'instructions': 'Enter your Vanilla Forums jsConnect Client ID.',
+        suggestEnvVars: true,
+        'id': 'vanillaForumsClientID',
+        'name': 'vanillaForumsClientID',
+        'value': settings.vanillaForumsClientID,
+        'warning': configWarning('vanillaForumsClientID')
+    }) }}
+    {{ forms.autosuggestField({
+        'label': 'Vanilla Forums jsConnect Secret',
+        'instructions': 'Enter your Vanilla Forums jsConnect Secret.',
+        suggestEnvVars: true,
+        'id': 'vanillaForumsSecret',
+        'name': 'vanillaForumsSecret',
+        'value': settings.vanillaForumsSecret,
+        'warning': configWarning('vanillaForumsSecret')
+    }) }}
+{% else %}
+    {{ forms.textField({
+        'label': 'Vanilla Forums jsConnect Client ID',
+        'instructions': 'Enter your Vanilla Forums jsConnect Client ID.',
+        'id': 'vanillaForumsClientID',
+        'name': 'vanillaForumsClientID',
+        'value': settings.vanillaForumsClientID,
+        'warning': configWarning('vanillaForumsClientID')
+    }) }}
+    
+    {{ forms.textField({
+        'label': 'Vanilla Forums jsConnect Secret',
+        'instructions': 'Enter your Vanilla Forums jsConnect Secret.',
+        'id': 'vanillaForumsSecret',
+        'name': 'vanillaForumsSecret',
+        'value': settings.vanillaForumsSecret,
+        'warning': configWarning('vanillaForumsSecret')
+    }) }}
+{% endif %}
