@@ -60,8 +60,9 @@ By default, this endpoint attempts to SSO the currently logged in user, but you 
 Assuming you've set up everything properly, all you have to do for [Embedded SSO](https://docs.vanillaforums.com/help/sso/jsconnect/#method-2-embedded-sso) (for things like blog comments, etc.) is to go to your Vanilla Forums Dashboard, click on Forum &rarr; Blog Comments &rarr; Universial Code and follow the instructions there.
 
 You'll need to add a line after the `var vanilla_identifier` that looks like this to enable SSO for embedded comments:
-
+```twig
     var vanilla_sso = '{{ vanillaforums.sso.embeddedOutput }}'; // Your SSO string.
+```
 
 That will output an encoded string of characters that should look something like this:
 
