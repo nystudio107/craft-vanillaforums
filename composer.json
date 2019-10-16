@@ -8,6 +8,8 @@
         "cms",
         "craftcms",
         "craft-plugin",
+        "vanilla",
+        "forums",
         "vanillaforums"
     ],
     "support": {
