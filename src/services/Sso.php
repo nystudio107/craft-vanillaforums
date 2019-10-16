@@ -60,6 +60,7 @@ class Sso extends Component
      * @param int $userId
      *
      * @return string
+     * @throws \yii\base\ExitException
      */
     public function output(int $userId = 0): string
     {
@@ -68,7 +69,7 @@ class Sso extends Component
         $ssoData = $this->getSsoData($userId);
         if ($ssoData !== null) {
             $request = Craft::$app->getRequest();
-            ob_start(); // Start output buffering
+            //ob_start(); // Start output buffering
             \WriteJsConnect(
                 $ssoData->toArray(),
                 $request->get(),
@@ -76,11 +77,13 @@ class Sso extends Component
                 $settings->vanillaForumsSecret,
                 true
             );
-            $result = ob_get_contents();
-            ob_end_clean(); // Store buffer in variable
+            //$result = ob_get_contents();
+            //ob_end_clean(); // Store buffer in variable
         }
 
-        return $result === false ? '' : $result;
+        Craft::$app->end();
+
+        //return $result === false ? '' : $result;
     }
 
     /**

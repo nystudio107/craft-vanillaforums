@@ -25,20 +25,6 @@ class VanillaforumsVariable
     // =========================================================================
 
     /**
-     * Generate the jsConnect string for single sign on
-     *
-     * @param int $userId
-     *
-     * @return string
-     */
-    public function output(int $userId = 0): string
-    {
-        return Template::raw(
-            Vanillaforums::$plugin->sso->output($userId)
-        );
-    }
-
-    /**
      * Generate an SSO string suitable for passing in the url for embedded SSO
      *
      * @param int $userId

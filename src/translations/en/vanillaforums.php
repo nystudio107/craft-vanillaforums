@@ -14,5 +14,10 @@
  * @since     3.0.0
  */
 return [
-    'Vanillaforums plugin loaded' => 'Vanillaforums plugin loaded',
+    'Enter your Vanilla Forums jsConnect Secret.' => 'Enter your Vanilla Forums jsConnect Secret.',
+    'This is being overridden by the `#{setting}` setting in the `config/#{file}.php` file.' => 'This is being overridden by the `#{setting}` setting in the `config/#{file}.php` file.',
+    'Vanilla Forums jsConnect Secret' => 'Vanilla Forums jsConnect Secret',
+    '{name} plugin loaded' => '{name} plugin loaded',
+    'Enter your Vanilla Forums jsConnect Client ID.' => 'Enter your Vanilla Forums jsConnect Client ID.',
+    'Vanilla Forums jsConnect Client ID' => 'Vanilla Forums jsConnect Client ID'
 ];

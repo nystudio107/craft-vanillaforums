@@ -16,10 +16,10 @@
 
 {% do view.registerAssetBundle("nystudio107\\vanillaforums\\assetbundles\\vanillaforums\\VanillaforumsAsset") %}
 
-{% macro configWarning(setting, file='vanillaforums') -%}
+{% macro configWarning(setting, file="vanillaforums") -%}
     {%- set configArray = craft.app.config.getConfigFromFile(file) -%}
     {%- if configArray[setting] is defined -%}
-        {{- "This is being overridden by the `#{setting}` setting in the `config/#{file}.php` file." |raw }}
+        {{- "This is being overridden by the `#{setting}` setting in the `config/#{file}.php` file."|t("vanillaforums")|raw }}
     {%- else -%}
         {{ false }}
     {%- endif -%}
@@ -30,39 +30,39 @@
 
 {% if craft.vanillaforums.craft31 %}
     {{ forms.autosuggestField({
-        'label': 'Vanilla Forums jsConnect Client ID',
-        'instructions': 'Enter your Vanilla Forums jsConnect Client ID.',
+        "label": "Vanilla Forums jsConnect Client ID"|t("vanillaforums"),
+        "instructions": "Enter your Vanilla Forums jsConnect Client ID."|t("vanillaforums"),
         suggestEnvVars: true,
-        'id': 'vanillaForumsClientID',
-        'name': 'vanillaForumsClientID',
-        'value': settings.vanillaForumsClientID,
-        'warning': configWarning('vanillaForumsClientID')
+        "id": "vanillaForumsClientID",
+        "name": "vanillaForumsClientID",
+        "value": settings.vanillaForumsClientID,
+        "warning": configWarning("vanillaForumsClientID")
     }) }}
     {{ forms.autosuggestField({
-        'label': 'Vanilla Forums jsConnect Secret',
-        'instructions': 'Enter your Vanilla Forums jsConnect Secret.',
+        "label": "Vanilla Forums jsConnect Secret"|t("vanillaforums"),
+        "instructions": "Enter your Vanilla Forums jsConnect Secret."|t("vanillaforums"),
         suggestEnvVars: true,
-        'id': 'vanillaForumsSecret',
-        'name': 'vanillaForumsSecret',
-        'value': settings.vanillaForumsSecret,
-        'warning': configWarning('vanillaForumsSecret')
+        "id": "vanillaForumsSecret",
+        "name": "vanillaForumsSecret",
+        "value": settings.vanillaForumsSecret,
+        "warning": configWarning("vanillaForumsSecret")
     }) }}
 {% else %}
     {{ forms.textField({
-        'label': 'Vanilla Forums jsConnect Client ID',
-        'instructions': 'Enter your Vanilla Forums jsConnect Client ID.',
-        'id': 'vanillaForumsClientID',
-        'name': 'vanillaForumsClientID',
-        'value': settings.vanillaForumsClientID,
-        'warning': configWarning('vanillaForumsClientID')
+        "label": "Vanilla Forums jsConnect Client ID"|t("vanillaforums"),
+        "instructions": "Enter your Vanilla Forums jsConnect Client ID."|t("vanillaforums"),
+        "id": "vanillaForumsClientID",
+        "name": "vanillaForumsClientID",
+        "value": settings.vanillaForumsClientID,
+        "warning": configWarning("vanillaForumsClientID")
     }) }}
-    
+
     {{ forms.textField({
-        'label': 'Vanilla Forums jsConnect Secret',
-        'instructions': 'Enter your Vanilla Forums jsConnect Secret.',
-        'id': 'vanillaForumsSecret',
-        'name': 'vanillaForumsSecret',
-        'value': settings.vanillaForumsSecret,
-        'warning': configWarning('vanillaForumsSecret')
+        "label": "Vanilla Forums jsConnect Secret",
+        "instructions": "Enter your Vanilla Forums jsConnect Secret.",
+        "id": "vanillaForumsSecret",
+        "name": "vanillaForumsSecret",
+        "value": settings.vanillaForumsSecret,
+        "warning": configWarning("vanillaForumsSecret")
     }) }}
 {% endif %}
