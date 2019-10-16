@@ -27,6 +27,8 @@ Vanilla Forums works on Craft 3.x.
 
 The Vanilla Forums plugins allows you to have a Single Sign-On (SSO) integration with [Craft CMS](https://craftcms.com/) and [Vanilla Forums](https://docs.vanillaforums.com/developer/installation/self-hosting/).
 
+That means that Craft CMS's login is used to auth. Then users are automatically signed in to Vanilla Forums without having to login in separately.
+
 ## Configuring Vanilla Forums
 
 1. Install jsConnect.  Make sure you have installed the [jsConnect plugin](https://open.vanillaforums.com/addon/jsconnect-plugin), and follow the documentation for [Vanilla SSO](https://docs.vanillaforums.com/help/sso/) setup.
