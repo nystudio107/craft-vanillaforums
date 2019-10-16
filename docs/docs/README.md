@@ -27,6 +27,8 @@ Vanilla Forums works on Craft 3.x.
 
 The Vanilla Forums plugins allows you to have a Single Sign-On (SSO) integration with [Craft CMS](https://craftcms.com/) and [Vanilla Forums](https://docs.vanillaforums.com/developer/installation/self-hosting/).
 
+That means that Craft CMS's login is used to auth. Then users are automatically signed in to Vanilla Forums without having to login in separately.
+
 ## Configuring Vanilla Forums
 
 1. Install jsConnect.  Make sure you have installed the [jsConnect plugin](https://open.vanillaforums.com/addon/jsconnect-plugin), and follow the documentation for [Vanilla SSO](https://docs.vanillaforums.com/help/sso/) setup.
@@ -58,8 +60,9 @@ By default, this endpoint attempts to SSO the currently logged in user, but you 
 Assuming you've set up everything properly, all you have to do for [Embedded SSO](https://docs.vanillaforums.com/help/sso/jsconnect/#method-2-embedded-sso) (for things like blog comments, etc.) is to go to your Vanilla Forums Dashboard, click on Forum &rarr; Blog Comments &rarr; Universial Code and follow the instructions there.
 
 You'll need to add a line after the `var vanilla_identifier` that looks like this to enable SSO for embedded comments:
-
+```twig
     var vanilla_sso = '{{ vanillaforums.sso.embeddedOutput }}'; // Your SSO string.
+```
 
 That will output an encoded string of characters that should look something like this:
 
