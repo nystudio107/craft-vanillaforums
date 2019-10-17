@@ -33,9 +33,9 @@ class Sso extends Component
     // =========================================================================
 
     /**
-     * @event SsoDataEvent The event that is triggered before the SSO data is
-     *        used You may set [[SsoDataEvent::isValid]] to `false` to prevent
-     *        SSO data from being used.
+     * @event SsoDataEvent The event that is triggered before the SSO data is used,
+     * you may modify the [[SsoDataEvent::data]] as you see fit. You may set
+     * [[SsoDataEvent::isValid]] to `false` to prevent SSO data from being used.
      *
      * ```php
      * use nystudio107\vanillaforums\services\Sso;
@@ -82,7 +82,6 @@ class Sso extends Component
         }
 
         Craft::$app->end();
-
         //return $result === false ? '' : $result;
     }
 
