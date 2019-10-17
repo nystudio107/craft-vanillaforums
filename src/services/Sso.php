@@ -75,7 +75,7 @@ class Sso extends Component
                 $request->get(),
                 $settings->vanillaForumsClientID,
                 $settings->vanillaForumsSecret,
-                true
+                $settings->hashAlgorithm ?? 'md5'
             );
             //$result = ob_get_contents();
             //ob_end_clean(); // Store buffer in variable
