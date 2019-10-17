@@ -26,6 +26,15 @@
 {%- endmacro %}
 {% from _self import configWarning %}
 
+    {{ forms.textField({
+        "label": "Authentication URL"|t("vanillaforums"),
+        "instructions": "The location of the JSONP formatted authentication data, which you should copy & paste into your Vanilla Forums settings."|t("vanillaforums"),
+        "id": "authenticationUrl",
+        "name": "authenticationUrl",
+        "value": actionUrl("vanillaforums/sso/output"),
+        "readonly": true,
+    }) }}
+
 <p>Please see <a href="https://docs.vanillaforums.com/help/sso/jsconnect/" target="_blank">jsConnect Single Sign-On (SSO) </a> for details on how to set up Vanilla Forums to use SSO</p>
 
 {% if craft.vanillaforums.craft31 %}
@@ -58,11 +67,21 @@
     }) }}
 
     {{ forms.textField({
-        "label": "Vanilla Forums jsConnect Secret",
-        "instructions": "Enter your Vanilla Forums jsConnect Secret.",
+        "label": "Vanilla Forums jsConnect Secret"|t("vanillaforums"),
+        "instructions": "Enter your Vanilla Forums jsConnect Secret."|t("vanillaforums"),
         "id": "vanillaForumsSecret",
         "name": "vanillaForumsSecret",
         "value": settings.vanillaForumsSecret,
         "warning": configWarning("vanillaForumsSecret")
     }) }}
 {% endif %}
+
+    {{ forms.selectField({
+        label: "Hash Algorithm"|t("vanillaforums"),
+        instructions: "You can select a custom hash algorithm to sign your requests. The hash algorithm must also be used in your client library. Choose md5 if you're not sure what to choose."|t("vanillaforums"),
+        id: "hashAlgorithm",
+        name: "hashAlgorithm",
+        value: settings.hashAlgorithm,
+        options: hashTypes,
+        errors: settings.getErrors("hashAlgorithm"),
+    }) }}

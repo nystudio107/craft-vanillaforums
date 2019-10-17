@@ -37,6 +37,11 @@ class Settings extends Model
      */
     public $vanillaForumsSecret = '';
 
+    /**
+     * @var string The hash algorithm to be ued when signing requests
+     */
+    public $hashAlgorithm = 'md5';
+
     // Public Methods
     // =========================================================================
 
@@ -48,6 +53,8 @@ class Settings extends Model
         return [
             [['vanillaForumsClientID', 'vanillaForumsSecret'], 'string'],
             [['vanillaForumsClientID', 'vanillaForumsSecret'], 'default', 'value' => ''],
+            ['hashAlgorithm', 'string'],
+            ['hashAlgorithm', 'default', 'value' => 'md5'],
         ];
     }
 
@@ -68,6 +75,8 @@ class Settings extends Model
             $behaviors['parser'] = [
                 'class' => EnvAttributeParserBehavior::class,
                 'attributes' => [
+                    'vanillaForumsClientID',
+                    'vanillaForumsSecret'
                 ],
             ];
         }

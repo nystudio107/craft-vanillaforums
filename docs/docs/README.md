@@ -94,6 +94,26 @@ Then you'll want a rewrite rule that looks something like this in your Nginx con
 
 Check out the [Apache](https://docs.vanillaforums.com/developer/backend/server-apache/) and [Nginx](https://docs.vanillaforums.com/developer/backend/server-nginx/) guides for details.
 
+## SSO Data Events
+
+Vanilla Forums throws a `SsoDataEvent` event, in case you want to modify the SSO Data that will be passed along to Vanilla Forums.
+
+`SsoDataEvent` is the event that is triggered before the SSO data is used, you may modify the [[SsoDataEvent::data]] as you see fit. You may set [[SsoDataEvent::isValid]] to `false` to prevent SSO data from being used.
+
+```php
+use nystudio107\vanillaforums\services\Sso;
+use nystudio107\vanillaforums\events\SsoDataEvent;
+
+Event::on(Sso::class,
+    SsoDataEvent::EVENT_SSO_DATA,
+    function(SsoDataEvent $event) {
+        // potentially set $event->isValid or modify $event->data
+    }
+);
+```
+
+For instance, you might modify [[SsoData::roles]] to add custom permissions roles.
+
 ## Vanilla Forums Roadmap
 
 Some things to do, and ideas for potential features:

@@ -28,4 +28,7 @@ return [
 
     // Vanilla Forums jsConnect Secret
     'vanillaForumsSecret' => '',
+
+    // The hash algorithm to be ued when signing requests
+    'hashAlgorithm' => 'md5',
 ];

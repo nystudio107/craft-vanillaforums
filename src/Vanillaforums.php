@@ -101,10 +101,15 @@ class Vanillaforums extends Plugin
      */
     protected function settingsHtml(): string
     {
+        // Set up the form controls for editing the connection.
+        $hashTypes = hash_algos();
+        $hashTypes = array_combine($hashTypes, $hashTypes);
+
         return Craft::$app->view->renderTemplate(
             'vanillaforums/settings',
             [
-                'settings' => $this->getSettings()
+                'settings' => $this->getSettings(),
+                'hashTypes' => $hashTypes,
             ]
         );
     }
