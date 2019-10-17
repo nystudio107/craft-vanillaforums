@@ -26,6 +26,15 @@
 {%- endmacro %}
 {% from _self import configWarning %}
 
+    {{ forms.textField({
+        "label": "Authentication URL"|t("vanillaforums"),
+        "instructions": "The location of the JSONP formatted authentication data, which you should copy & paste into your Vanilla Forums settings."|t("vanillaforums"),
+        "id": "authenticationUrl",
+        "name": "authenticationUrl",
+        "value": actionUrl("vanillaforums/sso/output"),
+        "readonly": true,
+    }) }}
+
 <p>Please see <a href="https://docs.vanillaforums.com/help/sso/jsconnect/" target="_blank">jsConnect Single Sign-On (SSO) </a> for details on how to set up Vanilla Forums to use SSO</p>
 
 {% if craft.vanillaforums.craft31 %}
