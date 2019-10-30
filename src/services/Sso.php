@@ -17,6 +17,7 @@ use nystudio107\vanillaforums\models\SsoData;
 
 use Craft;
 use craft\base\Component;
+use yii\web\Response;
 
 require_once(__DIR__.'/../lib/jsConnectPHP/functions.jsconnect.php');
 
@@ -77,6 +78,9 @@ class Sso extends Component
                 $settings->vanillaForumsSecret,
                 $settings->hashAlgorithm ?? 'md5'
             );
+
+            $content_type = jsConnectContentType($request->get());
+            $this->setResponseContentType($content_type);
             //$result = ob_get_contents();
             //ob_end_clean(); // Store buffer in variable
         }
@@ -173,5 +177,24 @@ class Sso extends Component
         }
 
         return $settings;
+    }
+
+    /**
+     * @param string $content_type
+     */
+    private function setResponseContentType(string $content_type)
+    {
+        if (!headers_sent()) {
+            $format = null;
+            if (false !== stripos($content_type, 'application/javascript')) {
+                $format = Response::FORMAT_JSONP;
+            } else if (false !== stripos($content_type, 'application/json')) {
+                $format = Response::FORMAT_JSON;
+            }
+
+            if (null !== $format) {
+                Craft::$app->getResponse()->format = $format;
+            }
+        }
     }
 }
