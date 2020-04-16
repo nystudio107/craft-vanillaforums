@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2019 nystudio107
  */
 
-namespace nystudio107\vanillaforums\assetbundles\Vanillaforums;
+namespace nystudio107\vanillaforums\assetbundles\vanillaforums;
 
 use Craft;
 use craft\web\AssetBundle;
