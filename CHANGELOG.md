@@ -1,5 +1,9 @@
 # Vanillaforums Changelog
 
+## 1.0.2 - 2020.04.16
+### Fixed
+* Fixed Asset Bundle namespace case
+
 ## 1.0.1 - 2019.10.17
 ### Added
 * Added a **Hash Algorithm** dropdown in Settings to allow you to choose the hash algorithm type
