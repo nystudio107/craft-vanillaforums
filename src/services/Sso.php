@@ -148,14 +148,14 @@ class Sso extends Component
         // Give plugins a chance to modify it
         $event = new SsoDataEvent([
             'user' => $user,
-            'data' => $data,
+            'ssoData' => $data,
         ]);
         $this->trigger(self::EVENT_SSO_DATA, $event);
         if (!$event->isValid) {
             return null;
         }
 
-        return $data;
+        return $event->ssoData;
     }
 
     /**
