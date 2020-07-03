@@ -1,5 +1,13 @@
 # Vanillaforums Changelog
 
+## 1.0.3 - 2020.07.03
+### Fixed
+* Fixed an issue where the incorrect `Content-Type` header was being sent back via [#4](https://github.com/nystudio107/craft-vanillaforums/pull/4)
+
+### Changed
+* Renamed SsoDataEvent::$data to SsoDataEvent::$ssoData via [#6](https://github.com/nystudio107/craft-vanillaforums/pull/6)
+* Updated docs to latest packages
+
 ## 1.0.2 - 2020.04.16
 ### Fixed
 * Fixed Asset Bundle namespace case
