@@ -33,5 +33,5 @@ class SsoDataEvent extends ModelEvent
     /**
      * @var SsoData|null the SsoData model
      */
-    public $data;
+    public $ssoData;
 }

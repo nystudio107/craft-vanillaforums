@@ -105,9 +105,9 @@ use nystudio107\vanillaforums\services\Sso;
 use nystudio107\vanillaforums\events\SsoDataEvent;
 
 Event::on(Sso::class,
-    SsoDataEvent::EVENT_SSO_DATA,
+    Sso::EVENT_SSO_DATA,
     function(SsoDataEvent $event) {
-        // potentially set $event->isValid or modify $event->data
+        // potentially set $event->isValid or modify $event->ssoData
     }
 );
 ```
