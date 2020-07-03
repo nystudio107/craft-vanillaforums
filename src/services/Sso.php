@@ -17,6 +17,7 @@ use nystudio107\vanillaforums\models\SsoData;
 
 use Craft;
 use craft\base\Component;
+use craft\web\Response;
 
 require_once(__DIR__.'/../lib/jsConnectPHP/functions.jsconnect.php');
 
@@ -67,6 +68,7 @@ class Sso extends Component
         $result = '';
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($userId);
+        Craft::$app->getResponse()->format = Response::FORMAT_RAW;
         if ($ssoData !== null) {
             $request = Craft::$app->getRequest();
             //ob_start(); // Start output buffering
@@ -148,14 +150,14 @@ class Sso extends Component
         // Give plugins a chance to modify it
         $event = new SsoDataEvent([
             'user' => $user,
-            'data' => $data,
+            'ssoData' => $data,
         ]);
         $this->trigger(self::EVENT_SSO_DATA, $event);
         if (!$event->isValid) {
             return null;
         }
 
-        return $data;
+        return $event->ssoData;
     }
 
     /**
