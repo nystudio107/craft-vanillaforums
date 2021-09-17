@@ -19,7 +19,7 @@ use Craft;
 use craft\base\Component;
 use craft\web\Response;
 
-require_once(__DIR__.'/../lib/jsConnectPHP/functions.jsconnect.php');
+use Vanilla\JsConnect\JsConnect;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
 
@@ -60,31 +60,29 @@ class Sso extends Component
      *
      * @param int $userId
      *
-     * @return string
      * @throws \yii\base\ExitException
      */
-    public function output(int $userId = 0): string
+    public function output(int $userId = 0)
     {
         $result = '';
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($userId);
         Craft::$app->getResponse()->format = Response::FORMAT_RAW;
-        if ($ssoData !== null) {
-            $request = Craft::$app->getRequest();
-            //ob_start(); // Start output buffering
-            \WriteJsConnect(
-                $ssoData->toArray(),
-                $request->get(),
-                $settings->vanillaForumsClientID,
-                $settings->vanillaForumsSecret,
-                $settings->hashAlgorithm ?? 'md5'
-            );
-            //$result = ob_get_contents();
-            //ob_end_clean(); // Store buffer in variable
-        }
 
-        Craft::$app->end();
-        //return $result === false ? '' : $result;
+
+        if ($ssoData !== null) {
+            $jsConnect = new JsConnect();
+            $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
+            $jsConnect
+                ->setUniqueID($ssoData->uniqueid)
+                ->setName($ssoData->name)
+                ->setEmail($ssoData->email)
+                ->setPhotoUrl($ssoData->photourl)
+            ;
+            $request = Craft::$app->getRequest();
+            // And away we go
+            $jsConnect->handleRequest($request->get());
+        }
     }
 
     /**
@@ -100,11 +98,16 @@ class Sso extends Component
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($userId);
         if ($ssoData !== null) {
-            $result = \JsSSOString(
-                $ssoData->toArray(),
-                $settings->vanillaForumsClientID,
-                $settings->vanillaForumsSecret
-            );
+            $jsConnect = new JsConnect();
+            $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
+            $jsConnect
+                ->setUniqueID($ssoData->uniqueid)
+                ->setName($ssoData->name)
+                ->setEmail($ssoData->email)
+                ->setPhotoUrl($ssoData->photourl)
+            ;
+            // @TODO unclear how to return a string using the new library
+            // https://github.com/vanilla/jsConnectPHP
         }
 
         return $result;
