@@ -2,7 +2,7 @@
     "name": "nystudio107/craft-vanillaforums",
     "description": "Single Sign On plugin for Vanilla Forums/jsConnect and CraftCMS",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "3.0.0",
     "keywords": [
         "craft",
         "cms",
@@ -24,7 +24,8 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0"
+        "craftcms/cms": "^3.0.0",
+        "vanilla/js-connect-php": "^3.0.0"
     },
     "autoload": {
         "psr-4": {
