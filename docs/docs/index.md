@@ -10,7 +10,7 @@ Related: [Vanillaforums for Craft 2.x](https://github.com/nystudio107/vanillafor
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 3.0.0 and Vanilla Forums & jsConnect 3.0.0 or later.
 
 ## Installation
 
@@ -33,9 +33,9 @@ That means that Craft CMS's login is used to auth. Then users are automatically 
 
 1. Install jsConnect.  Make sure you have installed the [jsConnect plugin](https://open.vanillaforums.com/addon/jsconnect-plugin), and follow the documentation for [Vanilla SSO](https://docs.vanillaforums.com/help/sso/) setup.
 
-2. Go to your Vanilla Forums Dashboard &rarr; Settings, under Users click on **jsConnect**, and enabled **Auto Connect** and disable **Use Popup Sign In Pages** ![Screenshot](./resources/img/vanilla-jsconnect.png)
+2. Go to your Vanilla Forums Dashboard &rarr; Settings, under Users click on **jsConnect**, and enabled **Auto Connect** and disable **Use Popup Sign In Pages** ![Screenshot](./resources/screenshots/vanilla-jsconnect.png)
 
-3. Then click on **Add Connection**.  Click on **Generate Client ID and Secret** to generate random Client ID and Secret fields ![Screenshot](./resources/img/vanilla-connection-settings.png)
+3. Then click on **Add Connection**.  Click on **Generate Client ID and Secret** to generate random Client ID and Secret fields ![Screenshot](./resources/screenshots/vanilla-connection-settings.png)
 
 3. For the **Authentication URL** put in `https://example.com/actions/vanillaforums/sso/output` (swap out `https://example.com` for your own site URL) which is a controller endpoint provided by Vanilla Forums that handles the SSO for you.
 
