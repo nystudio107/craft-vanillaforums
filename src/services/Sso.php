@@ -145,9 +145,9 @@ class Sso extends Component
             // Fill in the initial data
             $data = new SsoData([
                 'uniqueid' => $user->id,
-                'name' => $name,
-                'email' => $user->email,
-                'photourl' => $photoUrl,
+                'name' => $name ?? '',
+                'email' => $user->email ?? '',
+                'photourl' => $photoUrl ?? '',
             ]);
         }
         // Give plugins a chance to modify it
