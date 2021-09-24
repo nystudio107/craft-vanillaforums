@@ -37,12 +37,12 @@ class SsoController extends Controller
     /**
      * Generate the jsConnect string for single sign on
      *
-     * @param int $userId
+     * @param string $jwt
      *
      * @throws \yii\base\ExitException
      */
-    public function actionOutput(int $userId = 0)
+    public function actionOutput(string $jwt)
     {
-        Vanillaforums::$plugin->sso->output($userId);
+        Vanillaforums::$plugin->sso->output($jwt);
     }
 }

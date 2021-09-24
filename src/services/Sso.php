@@ -62,11 +62,11 @@ class Sso extends Component
      *
      * @throws \yii\base\ExitException
      */
-    public function output(int $userId = 0)
+    public function output(string $jwt)
     {
         $result = '';
         $settings = $this->getPluginSettings();
-        $ssoData = $this->getSsoData($userId);
+        $ssoData = $this->getSsoData($jwt);
         Craft::$app->getResponse()->format = Response::FORMAT_RAW;
 
 
@@ -123,10 +123,11 @@ class Sso extends Component
      *
      * @return SsoData|null
      */
-    private function getSsoData(int $userId = 0)
+    private function getSsoData(string $jwt)
     {
         $data = null;
 
+        $userId = 0;
         // Assume the currently logged in user if no $userId is passed in
         if ($userId === 0) {
             $user = Craft::$app->getUser()->getIdentity();
