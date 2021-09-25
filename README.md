@@ -10,7 +10,7 @@ Related: [Vanillaforums for Craft 2.x](https://github.com/nystudio107/vanillafor
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 3.0.0 and Vanilla Forums 3 & jsConnect 1.6 or later.
 
 ## Installation
 
