@@ -1,8 +1,8 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/quality-score.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/?branch=v1) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/coverage.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/?branch=v1) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/build.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/build-status/v1) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/code-intelligence.svg?b=v1)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/quality-score.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/?branch=v3) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/coverage.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/?branch=v3) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/build.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/build-status/v3) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-vanillaforums/badges/code-intelligence.svg?b=v3)](https://scrutinizer-ci.com/code-intelligence)
 
 # Vanilla Forums plugin for Craft CMS 3.x
 
-Single Sign On plugin for Vanilla Forums/jsConnect and CraftCMS
+Single Sign On plugin for Vanilla Forums/jsConnect and Craft CMS
 
 ![Screenshot](./resources/img/plugin-logo.png)
 
@@ -10,7 +10,7 @@ Related: [Vanillaforums for Craft 2.x](https://github.com/nystudio107/vanillafor
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 and Vanilla Forums & jsConnect 3.0.0 or later.
+This plugin requires Craft CMS 3.0.0 and Vanilla Forums 3 & jsConnect 1.6 or later.
 
 ## Installation
 
@@ -25,13 +25,13 @@ Vanilla Forums works on Craft 3.x.
 
 ## Vanilla Forums Overview
 
-The Vanilla Forums plugins allows you to have a Single Sign-On (SSO) integration with [Craft CMS](https://craftcms.com/) and [Vanilla Forums](https://docs.vanillaforums.com/developer/installation/self-hosting/).
+The Vanilla Forums plugins allows you to have a Single Sign-On (SSO) integration with [Craft CMS](https://craftcms.com/) and [Vanilla Forums](https://success.vanillaforums.com/kb/articles/157-self-hosting-basics).
 
 That means that Craft CMS's login is used to auth. Then users are automatically signed in to Vanilla Forums without having to login in separately.
 
 ## Configuring Vanilla Forums
 
-1. Install jsConnect.  Make sure you have installed the [jsConnect plugin](https://open.vanillaforums.com/addon/jsconnect-plugin), and follow the documentation for [Vanilla SSO](https://docs.vanillaforums.com/help/sso/) setup.
+1. Install jsConnect.  Make sure you have installed the [jsConnect plugin](https://open.vanillaforums.com/addon/jsconnect-plugin), and follow the documentation for [Vanilla SSO](https://success.vanillaforums.com/kb/articles/34-jsconnect) setup.
 
 2. Go to your Vanilla Forums Dashboard &rarr; Settings, under Users click on **jsConnect**, and enabled **Auto Connect** and disable **Use Popup Sign In Pages** ![Screenshot](./resources/screenshots/vanilla-jsconnect.png)
 
@@ -45,15 +45,15 @@ That means that Craft CMS's login is used to auth. Then users are automatically 
 
 ### Site-Wide Single Sign On (SSO)
 
-Assuming you've set up everything properly, all you have to do for [Site-Wide SSO](https://docs.vanillaforums.com/help/sso/jsconnect/#technical-overview) is ensure that the **Authentication URL** is set to `https://example.com/actions/vanillaforums/sso/output` (swap out `https://example.com` for your own site URL) which is a controller endpoint provided by Vanilla Forums that handles the SSO for you.
+Assuming you've set up everything properly, all you have to do for [Site-Wide SSO](https://success.vanillaforums.com/kb/articles/34-jsconnect#technical-overview) is ensure that the **Authentication URL** is set to `https://example.com/actions/vanillaforums/sso/output` (swap out `https://example.com` for your own site URL) which is a controller endpoint provided by Vanilla Forums that handles the SSO for you.
 
-This will generate a properly configured `jsonp` response for the jsConnect SSO.
+This will generate a properly configured `jwt` response for the jsConnect SSO.
 
 You can test that it's working by clicking on the **Test URL** link under Users &rarr; jsConnect, it should look something like this:
 
     test({"uniqueid":"1","name":"Admin","email":"admin@example.com","photourl":"http:\/\/example.com\/cpresources\/userphotos\/admin\/100\/profilepic.jpg?x=abF7BLdua","client_id":"12345678","signature":"b1670c794d13a5214b3d0ddd3d9a2293"})
 
-By default, this endpoint attempts to SSO the currently logged in user, but you can also pass in a User ID if you like: `https://example.com/actions/vanillaforums/sso/output?user-id=2112`
+This endpoint attempts to SSO the currently logged in user.
 
 ### Embedded Single Sign On (SSO)
 

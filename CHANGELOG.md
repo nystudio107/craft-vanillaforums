@@ -1,8 +1,8 @@
 # Vanillaforums Changelog
 
-## 3.0.0 - UNRELEASED
+## 3.0.0 - 2021.09.24
 ### Added
-* Updated the plugin to work with jsConnect v3 as per [Upgrading jsConnect To Version 3](https://success.vanillaforums.com/kb/articles/206-upgrading-jsconnect-to-version-3)
+* Updated the plugin to work with Vanilla Forums v3 & jsConnect 1.6 as per [Upgrading jsConnect To Version 3](https://success.vanillaforums.com/kb/articles/206-upgrading-jsconnect-to-version-3)
 
 ## 1.0.3 - 2020.07.03
 ### Fixed

@@ -37,7 +37,7 @@
         "handle": "vanillaforums",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-vanillaforums/v1/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-vanillaforums/v3/CHANGELOG.md",
         "components": {
             "sso": "nystudio107\\vanillaforums\\services\\Sso"
         },
