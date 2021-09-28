@@ -14,8 +14,8 @@ module.exports = {
         docsDir: 'docs/docs',
         docsBranch: 'v3',
         algolia: {
-            apiKey: '',
-            indexName: 'vite'
+            apiKey: 'ee13d722e3dd95137d3a301663b92f82',
+            indexName: 'vanillaforums'
         },
         editLinks: true,
         editLinkText: 'Edit this page on GitHub',
