@@ -82,9 +82,12 @@ class Sso extends Component
             $response->headers->removeAll();
             // Clear any output buffering that may be processed
             $this->_clearOutputBuffer();
+            // Do this to prevent the Yii2 exception handler from sending its own response
+            Craft::$app->state = Craft::$app::STATE_END;
             $request = Craft::$app->getRequest();
             // And away we go
             $jsConnect->handleRequest($request->get());
+            Craft::$app->end();
         }
     }
 
