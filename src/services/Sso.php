@@ -195,10 +195,13 @@ class Sso extends Component
      */
     private function _clearOutputBuffer()
     {
-        if (ob_get_length() !== false) {
-            // If zlib.output_compression is enabled, then ob_clean() will corrupt the results of output buffering.
-            // ob_end_clean is what we want.
-            ob_end_clean();
+        // Turn off output buffering and discard OB contents
+        while (ob_get_length() !== false) {
+            // If ob_start() didn't have the PHP_OUTPUT_HANDLER_CLEANABLE flag, ob_get_clean() will cause a PHP notice
+            // and return false.
+            if (@ob_get_clean() === false) {
+                break;
+            }
         }
     }
 }
