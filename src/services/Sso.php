@@ -78,6 +78,8 @@ class Sso extends Component
             ;
             // Clear any headers that have been set
             header_remove();
+            $response = Craft::$app->getResponse();
+            $response->headers->removeAll();
             // Clear any output buffering that may be processed
             $this->_clearOutputBuffer();
             $request = Craft::$app->getRequest();
