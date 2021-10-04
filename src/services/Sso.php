@@ -67,9 +67,6 @@ class Sso extends Component
         $result = '';
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($jwt);
-        Craft::$app->getResponse()->format = Response::FORMAT_RAW;
-
-
         if ($ssoData !== null) {
             $jsConnect = new JsConnect();
             $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
@@ -79,6 +76,10 @@ class Sso extends Component
                 ->setEmail($ssoData->email)
                 ->setPhotoUrl($ssoData->photourl)
             ;
+            // Clear any headers that have been set
+            header_remove();
+            // Clear any output buffering that may be processed
+            $this->_clearOutputBuffer();
             $request = Craft::$app->getRequest();
             // And away we go
             $jsConnect->handleRequest($request->get());
@@ -179,5 +180,20 @@ class Sso extends Component
         }
 
         return $settings;
+    }
+
+    /**
+     * Clear the output buffer to prevent corrupt downloads.
+     *
+     * Need to check the OB status first, or else some PHP versions will throw an E_NOTICE
+     * since we have a custom error handler (http://pear.php.net/bugs/bug.php?id=9670).
+     */
+    private function _clearOutputBuffer()
+    {
+        if (ob_get_length() !== false) {
+            // If zlib.output_compression is enabled, then ob_clean() will corrupt the results of output buffering.
+            // ob_end_clean is what we want.
+            ob_end_clean();
+        }
     }
 }
