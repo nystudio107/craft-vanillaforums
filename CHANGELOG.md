@@ -1,5 +1,8 @@
 # Vanillaforums Changelog
 
+## 3.0.1 - UNRELEASED
+* Clear output buffers and headers before sending a SSO response
+
 ## 3.0.0 - 2021.09.24
 ### Added
 * Updated the plugin to work with Vanilla Forums v3 & jsConnect 1.6 as per [Upgrading jsConnect To Version 3](https://success.vanillaforums.com/kb/articles/206-upgrading-jsconnect-to-version-3)
