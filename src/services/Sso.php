@@ -64,25 +64,26 @@ class Sso extends Component
      */
     public function output(string $jwt)
     {
-        $result = '';
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($jwt);
-        Craft::$app->getResponse()->format = Response::FORMAT_RAW;
-
-
+        $jsConnect = new JsConnect();
+        $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
+        // If they are signed into Craft
         if ($ssoData !== null) {
-            $jsConnect = new JsConnect();
-            $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
             $jsConnect
                 ->setUniqueID($ssoData->uniqueid)
                 ->setName($ssoData->name)
                 ->setEmail($ssoData->email)
                 ->setPhotoUrl($ssoData->photourl)
             ;
-            $request = Craft::$app->getRequest();
-            // And away we go
-            $jsConnect->handleRequest($request->get());
+        } else {
+            // They are not signed into Craft
+            $jsConnect->setGuest(true);
         }
+        $request = Craft::$app->getRequest();
+        // And away we go
+        $jsConnect->handleRequest($request->get());
+        Craft::$app->end();
     }
 
     /**
@@ -179,5 +180,23 @@ class Sso extends Component
         }
 
         return $settings;
+    }
+
+    /**
+     * Clear the output buffer to prevent corrupt downloads.
+     *
+     * Need to check the OB status first, or else some PHP versions will throw an E_NOTICE
+     * since we have a custom error handler (http://pear.php.net/bugs/bug.php?id=9670).
+     */
+    private function _clearOutputBuffer()
+    {
+        // Turn off output buffering and discard OB contents
+        while (ob_get_length() !== false) {
+            // If ob_start() didn't have the PHP_OUTPUT_HANDLER_CLEANABLE flag, ob_get_clean() will cause a PHP notice
+            // and return false.
+            if (@ob_get_clean() === false) {
+                break;
+            }
+        }
     }
 }
