@@ -1,6 +1,7 @@
 # Vanillaforums Changelog
 
 ## 3.0.1 - 2021.10.05
+### Fixed
 * Handle the SSO case where the user is not logged into Craft CMS
 
 ## 3.0.0 - 2021.09.24
