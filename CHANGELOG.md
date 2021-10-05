@@ -1,7 +1,7 @@
 # Vanillaforums Changelog
 
-## 3.0.1 - UNRELEASED
-* Clear output buffers and headers before sending a SSO response
+## 3.0.1 - 2021.10.05
+* Handle the SSO case where the user is not logged into Craft CMS
 
 ## 3.0.0 - 2021.09.24
 ### Added
