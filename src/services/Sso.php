@@ -64,31 +64,26 @@ class Sso extends Component
      */
     public function output(string $jwt)
     {
-        $result = '';
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($jwt);
+        $jsConnect = new JsConnect();
+        $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
+        // If they are signed into Craft
         if ($ssoData !== null) {
-            $jsConnect = new JsConnect();
-            $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
             $jsConnect
                 ->setUniqueID($ssoData->uniqueid)
                 ->setName($ssoData->name)
                 ->setEmail($ssoData->email)
                 ->setPhotoUrl($ssoData->photourl)
             ;
-            // Clear any headers that have been set
-            header_remove();
-            $response = Craft::$app->getResponse();
-            $response->headers->removeAll();
-            // Clear any output buffering that may be processed
-            $this->_clearOutputBuffer();
-            // Do this to prevent the Yii2 exception handler from sending its own response
-            Craft::$app->state = Craft::$app::STATE_END;
-            $request = Craft::$app->getRequest();
-            // And away we go
-            $jsConnect->handleRequest($request->get());
-            Craft::$app->end();
+        } else {
+            // They are not signed into Craft
+            $jsConnect->setGuest(true);
         }
+        $request = Craft::$app->getRequest();
+        // And away we go
+        $jsConnect->handleRequest($request->get());
+        Craft::$app->end();
     }
 
     /**
