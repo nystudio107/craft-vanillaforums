@@ -10,7 +10,13 @@ Related: [Vanillaforums for Craft 2.x](https://github.com/nystudio107/vanillafor
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 and Vanilla Forums 3 & jsConnect 1.6 or later.
+This plugin requires Craft CMS `^3.0.0` and Vanilla Forums `2021.009+` & jsConnect 1.6 or later using the **Version 3** of the jsConnect protocol.
+
+The **Add Connect** modal should look like this:
+
+![Screenshot](./resources/screenshots/js-connect-protocol-version-full.png)
+
+If you are using an older version of Vanilla Forums with the jsConnect Version 2 protocol, use the [`^1.0.0` verison](https://github.com/nystudio107/craft-vanillaforums/releases/tag/1.0.3) of this plugin.
 
 ## Installation
 
