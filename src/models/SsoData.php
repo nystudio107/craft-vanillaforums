@@ -10,11 +10,8 @@
 
 namespace nystudio107\vanillaforums\models;
 
-use nystudio107\vanillaforums\Vanillaforums;
-
 use craft\base\Model;
 use craft\behaviors\EnvAttributeParserBehavior;
-
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -30,27 +27,27 @@ class SsoData extends Model
     /**
      * @var int Unique ID for this user
      */
-    public $uniqueid;
+    public int $uniqueid = 0;
 
     /**
      * @var string Display name for this user
      */
-    public $name;
+    public string $name = '';
 
     /**
      * @var string Email address for this user
      */
-    public $email;
+    public string $email = '';
 
     /**
-     * @var string Ootional comma-delimited roles for this user
+     * @var string Optional comma-delimited roles for this user
      */
-    public $roles;
+    public string $roles = '';
 
     /**
      * @var string URL to a photo for this user
      */
-    public $photourl;
+    public string $photourl = '';
 
     // Public Methods
     // =========================================================================
@@ -86,14 +83,11 @@ class SsoData extends Model
             'class' => AttributeTypecastBehavior::class,
             // 'attributeTypes' will be composed automatically according to `rules()`
         ];
-        // If we're running Craft 3.1 or later, add in the EnvAttributeParserBehavior
-        if (Vanillaforums::$craft31) {
-            $behaviors['parser'] = [
-                'class' => EnvAttributeParserBehavior::class,
-                'attributes' => [
-                ],
-            ];
-        }
+        $behaviors['parser'] = [
+            'class' => EnvAttributeParserBehavior::class,
+            'attributes' => [
+            ],
+        ];
 
         return $behaviors;
     }

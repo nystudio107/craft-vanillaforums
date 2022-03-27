@@ -35,18 +35,18 @@
         "readonly": true,
     }) }}
 
-<p>Please see <a href="https://docs.vanillaforums.com/help/sso/jsconnect/" target="_blank">jsConnect Single Sign-On (SSO) </a> for details on how to set up Vanilla Forums to use SSO</p>
+<p>Please see <a href="https://docs.vanillaforums.com/help/sso/jsconnect/" target="_blank">jsConnect Single Sign-On
+        (SSO) </a> for details on how to set up Vanilla Forums to use SSO</p>
 
-{% if craft.vanillaforums.craft31 %}
-    {{ forms.autosuggestField({
-        "label": "Vanilla Forums jsConnect Client ID"|t("vanillaforums"),
-        "instructions": "Enter your Vanilla Forums jsConnect Client ID."|t("vanillaforums"),
-        suggestEnvVars: true,
-        "id": "vanillaForumsClientID",
-        "name": "vanillaForumsClientID",
-        "value": settings.vanillaForumsClientID,
-        "warning": configWarning("vanillaForumsClientID")
-    }) }}
+{{ forms.autosuggestField({
+    "label": "Vanilla Forums jsConnect Client ID"|t("vanillaforums"),
+    "instructions": "Enter your Vanilla Forums jsConnect Client ID."|t("vanillaforums"),
+    suggestEnvVars: true,
+    "id": "vanillaForumsClientID",
+    "name": "vanillaForumsClientID",
+    "value": settings.vanillaForumsClientID,
+    "warning": configWarning("vanillaForumsClientID")
+}) }}
     {{ forms.autosuggestField({
         "label": "Vanilla Forums jsConnect Secret"|t("vanillaforums"),
         "instructions": "Enter your Vanilla Forums jsConnect Secret."|t("vanillaforums"),
@@ -56,25 +56,6 @@
         "value": settings.vanillaForumsSecret,
         "warning": configWarning("vanillaForumsSecret")
     }) }}
-{% else %}
-    {{ forms.textField({
-        "label": "Vanilla Forums jsConnect Client ID"|t("vanillaforums"),
-        "instructions": "Enter your Vanilla Forums jsConnect Client ID."|t("vanillaforums"),
-        "id": "vanillaForumsClientID",
-        "name": "vanillaForumsClientID",
-        "value": settings.vanillaForumsClientID,
-        "warning": configWarning("vanillaForumsClientID")
-    }) }}
-
-    {{ forms.textField({
-        "label": "Vanilla Forums jsConnect Secret"|t("vanillaforums"),
-        "instructions": "Enter your Vanilla Forums jsConnect Secret."|t("vanillaforums"),
-        "id": "vanillaForumsSecret",
-        "name": "vanillaForumsSecret",
-        "value": settings.vanillaForumsSecret,
-        "warning": configWarning("vanillaForumsSecret")
-    }) }}
-{% endif %}
 
     {{ forms.selectField({
         label: "Hash Algorithm"|t("vanillaforums"),

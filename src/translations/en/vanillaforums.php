@@ -19,5 +19,9 @@ return [
     'Vanilla Forums jsConnect Secret' => 'Vanilla Forums jsConnect Secret',
     '{name} plugin loaded' => '{name} plugin loaded',
     'Enter your Vanilla Forums jsConnect Client ID.' => 'Enter your Vanilla Forums jsConnect Client ID.',
-    'Vanilla Forums jsConnect Client ID' => 'Vanilla Forums jsConnect Client ID'
+    'Vanilla Forums jsConnect Client ID' => 'Vanilla Forums jsConnect Client ID',
+    'Hash Algorithm' => 'Hash Algorithm',
+    'Authentication URL' => 'Authentication URL',
+    'The location of the JSONP formatted authentication data, which you should copy & paste into your Vanilla Forums settings.' => 'The location of the JSONP formatted authentication data, which you should copy & paste into your Vanilla Forums settings.',
+    'You can select a custom hash algorithm to sign your requests. The hash algorithm must also be used in your client library. Choose md5 if you\'re not sure what to choose.' => 'You can select a custom hash algorithm to sign your requests. The hash algorithm must also be used in your client library. Choose md5 if you\'re not sure what to choose.'
 ];

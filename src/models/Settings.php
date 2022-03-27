@@ -10,11 +10,8 @@
 
 namespace nystudio107\vanillaforums\models;
 
-use nystudio107\vanillaforums\Vanillaforums;
-
 use craft\base\Model;
 use craft\behaviors\EnvAttributeParserBehavior;
-
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -30,17 +27,17 @@ class Settings extends Model
     /**
      * @var string Vanilla Forums jsConnect Client ID
      */
-    public $vanillaForumsClientID = '';
+    public string $vanillaForumsClientID = '';
 
     /**
      * @var string Vanilla Forums jsConnect Secret
      */
-    public $vanillaForumsSecret = '';
+    public string $vanillaForumsSecret = '';
 
     /**
      * @var string The hash algorithm to be ued when signing requests
      */
-    public $hashAlgorithm = 'md5';
+    public string $hashAlgorithm = 'md5';
 
     // Public Methods
     // =========================================================================
@@ -70,16 +67,13 @@ class Settings extends Model
             'class' => AttributeTypecastBehavior::class,
             // 'attributeTypes' will be composed automatically according to `rules()`
         ];
-        // If we're running Craft 3.1 or later, add in the EnvAttributeParserBehavior
-        if (Vanillaforums::$craft31) {
-            $behaviors['parser'] = [
-                'class' => EnvAttributeParserBehavior::class,
-                'attributes' => [
-                    'vanillaForumsClientID',
-                    'vanillaForumsSecret'
-                ],
-            ];
-        }
+        $behaviors['parser'] = [
+            'class' => EnvAttributeParserBehavior::class,
+            'attributes' => [
+                'vanillaForumsClientID',
+                'vanillaForumsSecret'
+            ],
+        ];
 
         return $behaviors;
     }

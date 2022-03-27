@@ -1,5 +1,11 @@
 # Vanillaforums Changelog
 
+## 4.0.0-beta.1 - 2022.03.27
+
+### Added
+
+* Initial Craft CMS 4 compatibility
+
 ## 3.0.1 - 2021.10.05
 ### Fixed
 * Handle the SSO case where the user is not logged into Craft CMS
