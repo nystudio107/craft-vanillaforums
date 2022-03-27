@@ -50,7 +50,7 @@ class Vanillaforums extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.0.0';
 
     // Public Methods
     // =========================================================================
@@ -91,7 +91,7 @@ class Vanillaforums extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?\craft\base\Model
     {
         return new Settings();
     }
@@ -99,7 +99,7 @@ class Vanillaforums extends Plugin
     /**
      * @inheritdoc
      */
-    protected function settingsHtml(): string
+    protected function settingsHtml(): ?string
     {
         // Set up the form controls for editing the connection.
         $hashTypes = hash_algos();

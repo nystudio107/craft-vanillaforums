@@ -58,7 +58,7 @@ class SsoData extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['uniqueid'], 'integer'],
@@ -77,7 +77,7 @@ class SsoData extends Model
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         // Keep any parent behaviors
         $behaviors = parent::behaviors();

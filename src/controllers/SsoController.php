@@ -29,7 +29,7 @@ class SsoController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['output'];
+    protected array|bool|int $allowAnonymous = ['output'];
 
     // Public Methods
     // =========================================================================
