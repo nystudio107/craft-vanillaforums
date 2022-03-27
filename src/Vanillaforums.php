@@ -10,14 +10,13 @@
 
 namespace nystudio107\vanillaforums;
 
-use nystudio107\vanillaforums\services\Sso as SsoService;
-use nystudio107\vanillaforums\variables\VanillaforumsVariable;
-use nystudio107\vanillaforums\models\Settings;
-
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\web\twig\variables\CraftVariable;
-
+use nystudio107\vanillaforums\models\Settings;
+use nystudio107\vanillaforums\services\Sso as SsoService;
+use nystudio107\vanillaforums\variables\VanillaforumsVariable;
 use yii\base\Event;
 
 /**
@@ -35,14 +34,9 @@ class Vanillaforums extends Plugin
     // =========================================================================
 
     /**
-     * @var Vanillaforums
+     * @var ?Vanillaforums
      */
-    public static $plugin;
-
-    /**
-     * @var bool
-     */
-    public static $craft31 = false;
+    public static ?Vanillaforums $plugin = null;
 
     // Public Properties
     // =========================================================================
@@ -52,23 +46,43 @@ class Vanillaforums extends Plugin
      */
     public string $schemaVersion = '1.0.0';
 
+    /**
+     * @var bool
+     */
+    public bool $hasCpSection = false;
+
+    /**
+     * @var bool
+     */
+    public bool $hasCpSettings = true;
+
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function __construct($id, $parent = null, array $config = [])
+    {
+        $config['components'] = [
+            'sso' => SsoService::class,
+        ];
+
+        parent::__construct($id, $parent, $config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$plugin = $this;
 
-        self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
-
         Event::on(
             CraftVariable::class,
             CraftVariable::EVENT_INIT,
-            function (Event $event) {
+            static function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('vanillaforums', VanillaforumsVariable::class);
@@ -91,7 +105,7 @@ class Vanillaforums extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel(): ?\craft\base\Model
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }

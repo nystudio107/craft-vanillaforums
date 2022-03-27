@@ -12,7 +12,6 @@ namespace nystudio107\vanillaforums\events;
 
 use craft\elements\User;
 use nystudio107\vanillaforums\models\SsoData;
-
 use yii\base\ModelEvent;
 
 /**
@@ -26,12 +25,12 @@ class SsoDataEvent extends ModelEvent
     // =========================================================================
 
     /**
-     * @var User|null The user associated with this SSO data (usually the currently logged in user)
+     * @var ?User The user associated with this SSO data (usually the currently logged in user)
      */
-    public $user;
+    public ?User $user;
 
     /**
-     * @var SsoData|null the SsoData model
+     * @var ?SsoData the SsoData model
      */
-    public $ssoData;
+    public ?SsoData $ssoData;
 }

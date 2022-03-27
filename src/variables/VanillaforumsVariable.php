@@ -10,9 +10,9 @@
 
 namespace nystudio107\vanillaforums\variables;
 
-use nystudio107\vanillaforums\Vanillaforums;
-
 use craft\helpers\Template;
+use nystudio107\vanillaforums\Vanillaforums;
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -30,6 +30,7 @@ class VanillaforumsVariable
      * @param int $userId
      *
      * @return string
+     * @throws InvalidConfigException
      */
     public function embeddedOutput(int $userId = 0): string
     {
@@ -45,6 +46,6 @@ class VanillaforumsVariable
      */
     public function craft31(): bool
     {
-        return Vanillaforums::$craft31;
+        return true;
     }
 }

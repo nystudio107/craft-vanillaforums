@@ -10,16 +10,16 @@
 
 namespace nystudio107\vanillaforums\services;
 
-use nystudio107\vanillaforums\models\Settings;
-use nystudio107\vanillaforums\Vanillaforums;
-use nystudio107\vanillaforums\events\SsoDataEvent;
-use nystudio107\vanillaforums\models\SsoData;
-
 use Craft;
 use craft\base\Component;
-use craft\web\Response;
-
+use craft\helpers\App;
+use nystudio107\vanillaforums\events\SsoDataEvent;
+use nystudio107\vanillaforums\models\Settings;
+use nystudio107\vanillaforums\models\SsoData;
+use nystudio107\vanillaforums\Vanillaforums;
 use Vanilla\JsConnect\JsConnect;
+use yii\base\ExitException;
+use yii\base\InvalidConfigException;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
 
@@ -50,7 +50,7 @@ class Sso extends Component
      * );
      * ```
      */
-    const EVENT_SSO_DATA = 'vanillaForumsSsoData';
+    public const EVENT_SSO_DATA = 'vanillaForumsSsoData';
 
     // Public Methods
     // =========================================================================
@@ -58,26 +58,25 @@ class Sso extends Component
     /**
      * Generate the jsConnect string for single sign on
      *
-     * @param int $userId
+     * @param string $jwt
      *
-     * @throws \yii\base\ExitException
+     * @throws ExitException|InvalidConfigException
      */
-    public function output(string $jwt)
+    public function output(string $jwt): void
     {
         $settings = $this->getPluginSettings();
         $ssoData = $this->getSsoData($jwt);
         $jsConnect = new JsConnect();
         $jsConnect->setSigningCredentials($settings->vanillaForumsClientID, $settings->vanillaForumsSecret);
-        // If they are signed into Craft
+        // If they are signed in to Craft
         if ($ssoData !== null) {
             $jsConnect
                 ->setUniqueID($ssoData->uniqueid)
                 ->setName($ssoData->name)
                 ->setEmail($ssoData->email)
-                ->setPhotoUrl($ssoData->photourl)
-            ;
+                ->setPhotoUrl($ssoData->photourl);
         } else {
-            // They are not signed into Craft
+            // They are not signed in to Craft
             $jsConnect->setGuest(true);
         }
         $request = Craft::$app->getRequest();
@@ -92,6 +91,7 @@ class Sso extends Component
      * @param int $userId
      *
      * @return string
+     * @throws InvalidConfigException
      */
     public function embeddedOutput(int $userId = 0): string
     {
@@ -105,8 +105,7 @@ class Sso extends Component
                 ->setUniqueID($ssoData->uniqueid)
                 ->setName($ssoData->name)
                 ->setEmail($ssoData->email)
-                ->setPhotoUrl($ssoData->photourl)
-            ;
+                ->setPhotoUrl($ssoData->photourl);
             // @TODO unclear how to return a string using the new library
             // https://github.com/vanilla/jsConnectPHP
         }
@@ -122,13 +121,12 @@ class Sso extends Component
      *
      * @param int $userId
      *
-     * @return SsoData|null
+     * @return ?SsoData
+     * @throws InvalidConfigException
      */
-    private function getSsoData(string $jwt)
+    private function getSsoData(int $userId = 0): ?SsoData
     {
         $data = null;
-
-        $userId = 0;
         // Assume the currently logged in user if no $userId is passed in
         if ($userId === 0) {
             $user = Craft::$app->getUser()->getIdentity();
@@ -138,7 +136,7 @@ class Sso extends Component
         }
         if ($user) {
             $generalConfig = Craft::$app->getConfig()->getGeneral();
-            $name = $generalConfig->useEmailAsUsername ? $user->getFullName() : $user->username;
+            $name = $generalConfig->useEmailAsUsername ? $user->fullName : $user->username;
             $photoUrl = '';
             $photo = $user->getPhoto();
             if ($photo !== null) {
@@ -174,10 +172,8 @@ class Sso extends Component
     {
         /** @var Settings $settings */
         $settings = Vanillaforums::$plugin->getSettings();
-        if (Vanillaforums::$craft31) {
-            $settings->vanillaForumsClientID = Craft::parseEnv($settings->vanillaForumsClientID);
-            $settings->vanillaForumsSecret = Craft::parseEnv($settings->vanillaForumsSecret);
-        }
+        $settings->vanillaForumsClientID = App::parseEnv($settings->vanillaForumsClientID);
+        $settings->vanillaForumsSecret = App::parseEnv($settings->vanillaForumsSecret);
 
         return $settings;
     }
@@ -188,7 +184,7 @@ class Sso extends Component
      * Need to check the OB status first, or else some PHP versions will throw an E_NOTICE
      * since we have a custom error handler (http://pear.php.net/bugs/bug.php?id=9670).
      */
-    private function _clearOutputBuffer()
+    private function _clearOutputBuffer(): void
     {
         // Turn off output buffering and discard OB contents
         while (ob_get_length() !== false) {

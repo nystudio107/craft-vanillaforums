@@ -10,9 +10,9 @@
 
 namespace nystudio107\vanillaforums\controllers;
 
-use nystudio107\vanillaforums\Vanillaforums;
-
 use craft\web\Controller;
+use nystudio107\vanillaforums\Vanillaforums;
+use yii\base\ExitException;
 
 /**
  * @author    nystudio107
@@ -39,9 +39,9 @@ class SsoController extends Controller
      *
      * @param string $jwt
      *
-     * @throws \yii\base\ExitException
+     * @throws ExitException
      */
-    public function actionOutput(string $jwt)
+    public function actionOutput(string $jwt): void
     {
         Vanillaforums::$plugin->sso->output($jwt);
     }
